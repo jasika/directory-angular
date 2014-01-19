@@ -1,0 +1,40 @@
+angular.module("bookmarks.services", ["ngResource"]).
+    factory('Story', function ($resource) {
+        var Story = $resource('/stories/:storyId', {storyId: '@id'});
+        Story.prototype.isNew = function(){
+            return (typeof(this.id) === 'undefined');
+        }
+        return Story;
+    });
+
+angular.module("bookmarks", ["bookmarks.services"]).
+    config(function ($routeProvider) {
+        $routeProvider
+            .when('/', {templateUrl: 'views/stories/list.html', controller: StoryListController})
+            .when('/stories/new', {templateUrl: 'views/stories/create.html', controller: StoryCreateController})
+            .when('/stories/:storyId', {templateUrl: 'views/stories/detail.html', controller: StoryDetailController});
+    });
+
+function StoryListController($scope, Story) {
+    $scope.stories = Story.query();
+    
+}
+
+function StoryCreateController($scope, $routeParams, $location, Story) {
+
+    $scope.story = new Story();
+
+    $scope.save = function () {
+    	$scope.story.$save(function (story, headers) {
+    		toastr.success("Submitted New Story");
+            $location.path('/');
+        });
+    };
+}
+
+function StoryDetailController($scope, $routeParams, $location, Story) {
+    var storyId = $routeParams.storyId;
+    
+    $scope.story = Story.get({storyId: storyId});
+
+}
