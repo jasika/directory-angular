@@ -1,5 +1,6 @@
 package us.kulba.directory.dao;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -12,6 +13,7 @@ import us.kulba.directory.model.Contact;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.TimeZone;
 
 /**
  * Junit test for Contact testing.
@@ -26,32 +28,40 @@ public class ContactRepositoryTest {
     @Autowired
     ContactRepository contactRepository;
 
-    @Test
-    public void sayHello() {
-        logger.info("Hello Joe");
+    @Before
+    public void setup() {
+        logger.info("ContactRepositoryTest - deleteAll Contacts");
+        contactRepository.deleteAll();
     }
 
     @Test
-    public void insertContactTest() {
-        Calendar calendar = Calendar.getInstance();
+    public void saveNewContactTest() {
+        logger.info("ContactRepositoryTest - saveNewContact");
+//        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("America/Los_Angeles"));
 
         Contact c = new Contact();
         c.setFirstName("James");
         c.setLastName("Kulba");
-        c.setDateEntered(calendar.getTime());
-//        p.setDateUpdated(calendar.getTime());
 
         contactRepository.save(c);
         List<Contact> contacts = contactRepository.findAll();
-
-        logger.info("Hello Betty");
 
         for (Contact person : contacts) {
             logger.info(person.toString());
         }
     }
 
-    public void findPersonTest() {
+    public void findAndUpdateContactTest() {
+
+        List<Contact> contacts = contactRepository.findByLastName("Kulba");
+
+
+
+
+
+    }
+
+    public void removeContactTest() {
 
     }
 

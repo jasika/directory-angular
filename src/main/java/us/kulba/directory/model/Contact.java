@@ -2,6 +2,7 @@ package us.kulba.directory.model;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
@@ -25,7 +26,7 @@ public class Contact {
     private Date dateUpdated;
 
     public Contact() {
-        Calendar calendar = Calendar.getInstance();
+        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("America/Los_Angeles"));
         this.setDateEntered(calendar.getTime());
         this.id = new ObjectId().toString();
     }
@@ -52,7 +53,7 @@ public class Contact {
         return dateEntered;
     }
 
-    public void setDateEntered(Date dateEntered) {
+    private void setDateEntered(Date dateEntered) {
         this.dateEntered = dateEntered;
     }
 
