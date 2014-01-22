@@ -8,9 +8,10 @@ import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 import com.mongodb.Mongo;
+import us.kulba.directory.dao.ContactRepository;
 
 @Configuration
-@EnableMongoRepositories(basePackageClasses = us.kulba.directory.dao.ContactRepository.class)
+@EnableMongoRepositories(basePackageClasses = ContactRepository.class)
 public class TestConfig {
 
     @Bean

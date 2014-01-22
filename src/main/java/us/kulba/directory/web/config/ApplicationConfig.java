@@ -8,16 +8,16 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
-import us.kulba.directory.dao.ContactRepository;
 import com.mongodb.Mongo;
+import us.kulba.directory.dao.ContactRepository;
 
 @Configuration
-@EnableMongoRepositories(basePackageClasses = us.kulba.directory.dao.ContactRepository.class)
+@EnableMongoRepositories(basePackageClasses = ContactRepository.class)
 public class ApplicationConfig {
 
     @Bean
     public MongoTemplate mongoTemplate() throws Exception {
-        String mongoDbHost = "localhost";
+        String mongoDbHost = "10.9.152.52";
         int mongoDbPort = 27017;
         Mongo mongo = new Mongo(mongoDbHost, mongoDbPort);
 //        UserCredentials userCredentials = new UserCredentials(username, password);

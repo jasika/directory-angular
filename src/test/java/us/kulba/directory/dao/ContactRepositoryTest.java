@@ -31,38 +31,61 @@ public class ContactRepositoryTest {
     @Before
     public void setup() {
         logger.info("ContactRepositoryTest - deleteAll Contacts");
-        contactRepository.deleteAll();
+//        contactRepository.deleteAll();
     }
 
-    @Test
-    public void saveNewContactTest() {
-        logger.info("ContactRepositoryTest - saveNewContact");
-//        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("America/Los_Angeles"));
-
+    /**
+     * Local method to save a new contact.
+     * @return us.kulba.directory.model.Contact
+     */
+    private Contact save() {
+        logger.info("Saving new Contact");
         Contact c = new Contact();
         c.setFirstName("James");
         c.setLastName("Kulba");
 
         contactRepository.save(c);
-        List<Contact> contacts = contactRepository.findAll();
 
-        for (Contact person : contacts) {
-            logger.info(person.toString());
-        }
+        return c;
     }
 
-    public void findAndUpdateContactTest() {
+    @Test
+    public void saveNewContactTest() {
+        logger.info("ContactRepositoryTest - saveNewContact");
 
+        Contact c = this.save();
+        logger.info("Here's the first Contact");
+        logger.info(c.toString());
+    }
+
+    @Test
+    public void findAndUpdateContactTest() {
+        logger.info("ContactRepositoryTest - findAndUpdateContactTest");
+        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("America/Los_Angeles"));
+        Contact c = this.save();
         List<Contact> contacts = contactRepository.findByLastName("Kulba");
 
-
-
-
-
+        for (Contact contact : contacts) {
+            contact.setDateUpdated(calendar.getTime());
+            logger.info("Here's the updated Contact");
+            contactRepository.save(contact);
+            logger.info(contact.toString());
+        }
     }
 
     public void removeContactTest() {
 
     }
+
+    @Test
+    public void findByContactIdTest() {
+
+        Contact c = contactRepository.findOne("52df104d87866ca1f0a67d12");
+        logger.info("ContactRepositoryTest - findByContactIdTest");
+        logger.info(c.toString());
+
+
+    }
+
 
 }
