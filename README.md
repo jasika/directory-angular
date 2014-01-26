@@ -10,6 +10,7 @@ Setup
 > #### Environment Setup
 > * Java SDK ( prefer to use Java 1.7.0 or higher. )
 > * Apache Maven
+> * Mongodb 
 
 
 History
