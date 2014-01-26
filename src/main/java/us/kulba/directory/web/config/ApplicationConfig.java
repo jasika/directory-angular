@@ -17,7 +17,7 @@ public class ApplicationConfig {
 
     @Bean
     public MongoTemplate mongoTemplate() throws Exception {
-        String mongoDbHost = "10.9.152.52";
+        String mongoDbHost = "localhost";
         int mongoDbPort = 27017;
         Mongo mongo = new Mongo(mongoDbHost, mongoDbPort);
 //        UserCredentials userCredentials = new UserCredentials(username, password);
