@@ -1,0 +1,11 @@
+<h2>
+	Contacts <a class="btn btn-primary pull-right" href="#/contacts/new"><i
+		class="icon-plus-sign icon-white"></i> Save New Contact</a>
+</h2>
+
+<table class="table table-striped">
+	<tr ng-repeat="contact in contacts">
+		<td><a href="#/contacts/{{contact.id}}">{{story.title}}</a></td>
+		<td>{{story.fullname}}</td>
+	</tr>
+</table>

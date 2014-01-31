@@ -1,40 +1,40 @@
-angular.module("bookmarks.services", ["ngResource"]).
-    factory('Story', function ($resource) {
-        var Story = $resource('/stories/:storyId', {storyId: '@id'});
+angular.module("directory.services", ["ngResource"]).
+    factory('Contact', function ($resource) {
+        var Contact = $resource('/contacts/:contactId', {contactId: '@id'});
         Story.prototype.isNew = function(){
             return (typeof(this.id) === 'undefined');
         }
         return Story;
     });
 
-angular.module("bookmarks", ["bookmarks.services"]).
+angular.module("directory", ["directory.services"]).
     config(function ($routeProvider) {
         $routeProvider
-            .when('/', {templateUrl: 'views/stories/list.html', controller: StoryListController})
-            .when('/stories/new', {templateUrl: 'views/stories/create.html', controller: StoryCreateController})
-            .when('/stories/:storyId', {templateUrl: 'views/stories/detail.html', controller: StoryDetailController});
+            .when('/', {templateUrl: 'views/contacts/list.html', controller: ContactListController})
+            .when('/contacts/new', {templateUrl: 'views/contacts/create.html', controller: ContactCreateController})
+            .when('/contacts/:contactId', {templateUrl: 'views/contacts/detail.html', controller: ContactDetailController});
     });
 
-function StoryListController($scope, Story) {
-    $scope.stories = Story.query();
+function ContactListController($scope, Contact) {
+    $scope.contacts = Contact.query();
     
 }
 
-function StoryCreateController($scope, $routeParams, $location, Story) {
+function ContactCreateController($scope, $routeParams, $location, Contact) {
 
-    $scope.story = new Story();
+    $scope.contact = new Contact();
 
     $scope.save = function () {
-    	$scope.story.$save(function (story, headers) {
-    		toastr.success("Submitted New Story");
+    	$scope.contact.$save(function (contact, headers) {
+    		toastr.success("Contact Saved");
             $location.path('/');
         });
     };
 }
 
-function StoryDetailController($scope, $routeParams, $location, Story) {
-    var storyId = $routeParams.storyId;
+function ContactDetailController($scope, $routeParams, $location, Contact) {
+    var contactId = $routeParams.contactId;
     
-    $scope.story = Story.get({storyId: storyId});
+    $scope.contact = Contact.get({contactId: contactId});
 
 }
