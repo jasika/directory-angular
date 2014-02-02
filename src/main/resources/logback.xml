@@ -14,7 +14,7 @@
         <level value="INFO"/>
     </logger>
 
-    <logger name="org.hibernate">
+    <logger name="org.springframework.data.mongodb">
         <level value="INFO" />
     </logger>
 

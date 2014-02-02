@@ -28,11 +28,11 @@ public class ContactRepositoryTest {
     @Autowired
     ContactRepository contactRepository;
 
-    @Before
-    public void setup() {
-        logger.info("ContactRepositoryTest - deleteAll Contacts");
+//    @Before
+//    public void setup() {
+//        logger.info("ContactRepositoryTest - deleteAll Contacts");
 //        contactRepository.deleteAll();
-    }
+//    }
 
     /**
      * Local method to save a new contact.
@@ -58,34 +58,34 @@ public class ContactRepositoryTest {
         logger.info(c.toString());
     }
 
-    @Test
-    public void findAndUpdateContactTest() {
-        logger.info("ContactRepositoryTest - findAndUpdateContactTest");
-        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("America/Los_Angeles"));
-        Contact c = this.save();
-        List<Contact> contacts = contactRepository.findByLastName("Kulba");
+//    @Test
+//    public void findAndUpdateContactTest() {
+//        logger.info("ContactRepositoryTest - findAndUpdateContactTest");
+//        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("America/Los_Angeles"));
+//        Contact c = this.save();
+//        List<Contact> contacts = contactRepository.findByLastName("Kulba");
+//
+//        for (Contact contact : contacts) {
+//            contact.setDateUpdated(calendar.getTime());
+//            logger.info("Here's the updated Contact");
+//            contactRepository.save(contact);
+//            logger.info(contact.toString());
+//        }
+//    }
 
-        for (Contact contact : contacts) {
-            contact.setDateUpdated(calendar.getTime());
-            logger.info("Here's the updated Contact");
-            contactRepository.save(contact);
-            logger.info(contact.toString());
-        }
-    }
-
-    public void removeContactTest() {
-
-    }
-
-    @Test
+//    @Test
     public void findByContactIdTest() {
 
-        Contact c = contactRepository.findOne("52df104d87866ca1f0a67d12");
+        Contact c = contactRepository.findOne("52ec7f01da06307d6be054e5");
         logger.info("ContactRepositoryTest - findByContactIdTest");
         logger.info(c.toString());
-
-
     }
 
+//    @Test
+    public void removeContactTest() {
+        Contact c = contactRepository.findOne("52ec7f01da06307d6be054e5");
+        contactRepository.delete(c);
+        logger.info("Contact deleted");
+    }
 
 }

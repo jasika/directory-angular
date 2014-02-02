@@ -1,18 +1,18 @@
 angular.module("directory.services", ["ngResource"]).
     factory('Contact', function ($resource) {
-        var Contact = $resource('/contacts/:contactId', {contactId: '@id'});
-        Story.prototype.isNew = function(){
+        var Contact = $resource('contacts/:contactId', {contactId: '@id'});
+        Contact.prototype.isNew = function(){
             return (typeof(this.id) === 'undefined');
         }
-        return Story;
+        return Contact;
     });
 
 angular.module("directory", ["directory.services"]).
     config(function ($routeProvider) {
         $routeProvider
             .when('/', {templateUrl: 'views/contacts/list.html', controller: ContactListController})
-            .when('/contacts/new', {templateUrl: 'views/contacts/create.html', controller: ContactCreateController})
-            .when('/contacts/:contactId', {templateUrl: 'views/contacts/detail.html', controller: ContactDetailController});
+            .when('contacts/new', {templateUrl: 'views/contacts/create.html', controller: ContactCreateController})
+            .when('contacts/:contactId', {templateUrl: 'views/contacts/detail.html', controller: ContactDetailController});
     });
 
 function ContactListController($scope, Contact) {
