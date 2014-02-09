@@ -58,6 +58,17 @@ public class ContactRepositoryTest {
         logger.info(c.toString());
     }
 
+    @Test
+    public void findByLastNameLike() {
+        logger.info("ContactRepositoryTest - findByLastNameLike");
+        List<Contact> contacts = contactRepository.findByLastNameLike("ulb");
+
+        for (Contact contact : contacts) {
+            logger.info(contact.toString());
+        }
+
+    }
+
 //    @Test
 //    public void findAndUpdateContactTest() {
 //        logger.info("ContactRepositoryTest - findAndUpdateContactTest");
