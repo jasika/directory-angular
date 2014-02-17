@@ -1,0 +1,61 @@
+body {
+        padding-top: 60px;
+    }
+    #companyInfo {
+    padding:0;
+    top:0px;
+    width:600px;
+    position:relative;
+    right:10px;
+    bottom:0;
+    top:20px;
+    left: 0px;
+    list-style:none;
+    font-size:1em;
+    height:13px;
+    text-align: left;
+    }
+
+    #companyInfo li{
+    display:inline;
+    margin-right:2px;
+    margin-left:2px;
+    }
+
+    #footer {
+    height:59px;
+    background-color:#f5f5f5;
+    border-top: 1px solid #e5e5e5;
+    font-size:0.9em;
+    z-index:50;
+    }
+
+
+    h3{
+    font-weight:400;
+    }
+
+    h1, h2 {
+    font-weight:400;
+    }
+    .generalGuidelines li {
+    list-style:circle inside;
+    }
+
+    #social {
+    float:right;
+    margin-top: 5px;
+    padding:0;
+    display:inline;
+    text-align: right;
+    margin-right:10px;
+    width: 300px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    color:#7b7979;
+    }
+
+    #bottomContainer {
+    padding:0;
+    }
