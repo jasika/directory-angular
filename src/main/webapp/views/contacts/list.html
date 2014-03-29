@@ -6,6 +6,28 @@
 <table class="table table-striped">
 	<tr ng-repeat="contact in contacts">
 		<td><a href="#/contacts/{{contact.id}}">{{contact.fullName}}</a></td>
-		<td>{{contact.dateEntered | date:'medium'}}</td>
+        <td>
+            <table>
+                <tr ng-repeat="address in contact.addressList">
+                    <td>
+                        <!--{{address.addressLine1}}-->
+                        <div class="vcard">
+                            <span class="fn">James Kulba</span>
+                            <a class="email" href="mailto:jkulba@gmail.com">jkulba@gmail.com</a>
+                            <div class="adr">
+                                <div class="street-address">9 Hallcrest</div>
+                                <span class="locality">Ladera Ranch</span>,
+                                <span class="region">CA</span>,
+                                <span class="postal-code">92694</span>
+                                <span class="country-name">USA</span>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </td>
+		<!--<td>{{contact.addressList[0]}}</td>-->
+		<!--<td>{{contact.dateEntered | date:'medium'}}</td>-->
+
 	</tr>
 </table>

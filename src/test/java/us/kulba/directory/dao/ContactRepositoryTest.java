@@ -9,11 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import us.kulba.directory.config.TestConfig;
+import us.kulba.directory.model.Address;
 import us.kulba.directory.model.Contact;
 
-import java.util.Calendar;
-import java.util.List;
-import java.util.TimeZone;
+import java.util.*;
 
 /**
  * Junit test for Contact testing.
@@ -44,6 +43,28 @@ public class ContactRepositoryTest {
         c.setFirstName("James");
         c.setLastName("Kulba");
 
+        Address address = new Address();
+        address.setAddressLine1("123 Main");
+        address.setAddressLine2("BLANK");
+        address.setAddressCity("Los Angeles");
+        address.setAddressState("CA");
+        address.setZipCode("81950");
+        address.setPreferred(false);
+        address.setAddressType("WORK");
+
+        c.addAddress(address);
+
+        address = new Address();
+        address.setAddressLine1("27 Sonata");
+        address.setAddressLine2("BLANK");
+        address.setAddressCity("Irvine");
+        address.setAddressState("CA");
+        address.setZipCode("92813");
+        address.setPreferred(true);
+        address.setAddressType("HOME");
+
+        c.addAddress(address);
+
         contactRepository.save(c);
 
         return c;
@@ -54,11 +75,11 @@ public class ContactRepositoryTest {
         logger.info("ContactRepositoryTest - saveNewContact");
 
         Contact c = this.save();
-        logger.info("Here's the first Contact");
+        logger.info("Here's the first Contact id: " + c.getId());
         logger.info(c.toString());
     }
 
-    @Test
+//    @Test
     public void findByLastNameLike() {
         logger.info("ContactRepositoryTest - findByLastNameLike");
         List<Contact> contacts = contactRepository.findByLastNameLike("ulb");

@@ -1,8 +1,6 @@
 package us.kulba.directory.model;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.TimeZone;
+import java.util.*;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -25,6 +23,7 @@ public class Contact {
     private String lastName;
     private Date dateEntered;
     private Date dateUpdated;
+    private List<Address> addressList;
 
     public Contact() {
         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("America/Los_Angeles"));
@@ -64,6 +63,21 @@ public class Contact {
 
     public void setDateUpdated(Date dateUpdated) {
         this.dateUpdated = dateUpdated;
+    }
+
+    public List<Address> getAddressList() {
+        if (this.addressList == null) {
+            this.addressList = new ArrayList<Address>();
+        }
+        return this.addressList;
+    }
+
+    public void setAddressList(List<Address> addressList) {
+        getAddressList().addAll(addressList);
+    }
+
+    public void addAddress(Address address) {
+        getAddressList().add(address);
     }
 
     public String getFullName() {
