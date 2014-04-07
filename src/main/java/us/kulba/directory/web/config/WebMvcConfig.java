@@ -5,6 +5,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.json.MappingJacksonJsonView;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @EnableWebMvc
 @ComponentScan(basePackageClasses = us.kulba.directory.web.controller.PingController.class)
@@ -31,5 +32,13 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         MappingJacksonJsonView jsonView = new MappingJacksonJsonView();
         jsonView.setPrefixJson(true);
         return jsonView;
+    }
+
+    @Bean
+    public InternalResourceViewResolver getInternalResourceViewResolver() {
+        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+        resolver.setPrefix("/WEB-INF/views/");
+        resolver.setSuffix(".jsp");
+        return resolver;
     }
 }

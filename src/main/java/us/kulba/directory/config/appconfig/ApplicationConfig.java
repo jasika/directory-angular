@@ -1,4 +1,4 @@
-package us.kulba.directory.web.config;
+package us.kulba.directory.config.appconfig;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
