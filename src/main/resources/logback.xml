@@ -6,7 +6,7 @@
     </contextListener>
 
     <!-- To enable JMX Management -->
-    <jmxConfigurator/>
+    <!--<jmxConfigurator/>-->
 
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
@@ -15,7 +15,7 @@
     </appender>
 
     <logger name="us.kulba.directory" level="DEBUG"/>
-    <logger name="org.springframework" level="INFO"/>
+    <logger name="org.springframework" level="DEBUG"/>
     <logger name="org.springframework.beans" level="DEBUG"/>
 
     <root level="DEBUG">

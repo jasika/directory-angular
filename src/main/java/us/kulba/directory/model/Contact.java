@@ -12,7 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 /**
  * POJO for holding Contact info in the Directory.
  *
- * @author James Kulba, jkulba@gmail.com, 2013
+ * @author James Kulba, jkulba@gmail.com, 2014
  */
 @Document(collection = "contacts")
 public class Contact {
@@ -21,9 +21,11 @@ public class Contact {
     protected final String id;
     private String firstName;
     private String lastName;
+    private String nickname;
     private Date dateEntered;
     private Date dateUpdated;
     private List<Address> addressList;
+    private List<Phone> phoneList;
 
     public Contact() {
         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("America/Los_Angeles"));
@@ -49,6 +51,10 @@ public class Contact {
         this.lastName = lastName;
     }
 
+    public String getNickname() { return nickname; }
+
+    public void setNickname(String nickname) { this.nickname = nickname; }
+
     public Date getDateEntered() {
         return dateEntered;
     }
@@ -65,6 +71,17 @@ public class Contact {
         this.dateUpdated = dateUpdated;
     }
 
+    public List<Phone> getPhoneList() {
+        if (this.phoneList == null) {
+            this.phoneList = new ArrayList<Phone>();
+        }
+        return this.phoneList;
+    }
+
+    public void setPhoneList(List<Phone> phoneList) { this.phoneList = phoneList; }
+
+    public void addPhone(Phone phone) { getPhoneList().add(phone); }
+
     public List<Address> getAddressList() {
         if (this.addressList == null) {
             this.addressList = new ArrayList<Address>();
@@ -79,6 +96,7 @@ public class Contact {
     public void addAddress(Address address) {
         getAddressList().add(address);
     }
+
 
     public String getFullName() {
         String fullName[] = {firstName, lastName};

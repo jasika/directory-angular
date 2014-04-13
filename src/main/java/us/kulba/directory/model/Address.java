@@ -1,8 +1,5 @@
 package us.kulba.directory.model;
 
-//import org.bson.types.ObjectId;
-//import org.springframework.data.annotation.Id;
-
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
@@ -14,8 +11,6 @@ import java.util.TimeZone;
  */
 public class Address {
 
-//    @Id
-//    protected final String id;
     private String addressType;
     private String addressLine1;
     private String addressLine2;
@@ -28,8 +23,6 @@ public class Address {
     public Address() {
         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("America/Los_Angeles"));
         this.setDateUpdated(calendar.getTime());
-
-//        this.id = new ObjectId().toString();
     }
 
     public String getAddressType() {

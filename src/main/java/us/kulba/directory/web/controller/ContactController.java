@@ -32,9 +32,8 @@ public class ContactController {
      *
      * @return list of contacts
      */
-    @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public List<Contact> allContacts() {
+    @RequestMapping(method = RequestMethod.GET)
+    public @ResponseBody List<Contact> list() {
         logger.debug("Hit ContactController.allContacts()");
         return contactRepository.findAll();
     }
@@ -42,16 +41,15 @@ public class ContactController {
     /**
      * Controller end-point used to fetch contact record using contactId.
      *
-     * @param contactId
+     * @param id
      * @return contact
      */
-    @RequestMapping(value = "/{contactId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public Contact findContact(@PathVariable("contactId") String contactId) {
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public @ResponseBody Contact find(@PathVariable("id") String id) {
         logger.debug("Hit ContactController.findContact()");
-        Contact contact = contactRepository.findOne(contactId);
+        Contact contact = contactRepository.findOne(id);
         if (contact == null) {
-            throw new ContactNotFoundException(contactId);
+            throw new ContactNotFoundException(id);
         }
         return contact;
     }
@@ -62,13 +60,19 @@ public class ContactController {
      * @param contact in JSON form.
      * @return
      */
-    @RequestMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public ResponseEntity<Void> saveContact(@RequestBody Contact contact) {
+    @RequestMapping(method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<Void> save(@RequestBody Contact contact) {
         logger.debug("Hit ContactController.saveContact()");
         contactRepository.save(contact);
         ResponseEntity<Void> responseEntity = new ResponseEntity<Void>(HttpStatus.CREATED);
         return responseEntity;
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable("id") String id, @RequestBody Contact contact) {
+        contactRepository.delete(contact);
     }
 
 

@@ -1,33 +1,37 @@
-<!--<h2>-->
-	<!--Contacts <a class="btn btn-primary pull-right" href="#/contacts/new"><i-->
-		<!--class="icon-plus-sign icon-white"></i> Save New Contact</a>-->
-<!--</h2>-->
 
-<table class="table table-striped">
-	<tr ng-repeat="contact in contacts">
-		<td><a href="#/contacts/{{contact.id}}">{{contact.fullName}}</a></td>
-        <td>
-            <table>
-                <tr ng-repeat="address in contact.addressList">
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Contact Search Results
+    </div>
+
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="contact in contacts">
+                    <td>{{contact.firstName}}</td>
+                    <td>{{contact.lastName}}</td>
+                    <td>jkulba@gmail.com</td>
+                    <td><div ng-repeat="phone in contact.phoneList | filter:{ preferred: true }"/>{{phone.phoneNum}}</td>
                     <td>
-                        <!--{{address.addressLine1}}-->
-                        <div class="vcard">
-                            <span class="fn">James Kulba</span>
-                            <a class="email" href="mailto:jkulba@gmail.com">jkulba@gmail.com</a>
-                            <div class="adr">
-                                <div class="street-address">9 Hallcrest</div>
-                                <span class="locality">Ladera Ranch</span>,
-                                <span class="region">CA</span>,
-                                <span class="postal-code">92694</span>
-                                <span class="country-name">USA</span>
-                            </div>
+                        <div class="pull-right">
+                            <a class="btn btn-info" href="#contacts/{{contact.id}}">
+                                <i class="fa fa-pencil fa-fw"></i> Edit
+                            </a>
                         </div>
                     </td>
                 </tr>
+                </tbody>
             </table>
-        </td>
-		<!--<td>{{contact.addressList[0]}}</td>-->
-		<!--<td>{{contact.dateEntered | date:'medium'}}</td>-->
-
-	</tr>
-</table>
+        </div>
+    </div>
+</div>

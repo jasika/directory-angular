@@ -5,13 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="">
-    <!--<link rel="shortcut icon" href="../../assets/ico/favicon.ico">-->
+    <meta name="author" content="jkulba@gmail.com">
 
     <title>Project Directory ~ Find a friend</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font-Awesome CSS -->
+    <link href="css/font-awesome.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="css/dashboard.css" rel="stylesheet">
@@ -47,12 +48,16 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
-            <ul class="nav nav-sidebar">
-                <li class="active"><a href="#">All Contacts</a></li>
-                <li><a href="#">Family</a></li>
-                <li><a href="#">Friends</a></li>
-                <li><a href="#">Colleagues</a></li>
-            </ul>
+
+            <div ng-controller="NavBarController">
+                <ul class="nav nav-sidebar">
+                    <li ng-class="{ active: isActive('/')}"><a href="#">All Contacts</a></li>
+                    <li ng-class="{ active: isActive('/family')}"><a href="#/family">Family</a></li>
+                    <li ng-class="{ active: isActive('/friends')}"><a href="#/friends">Friends</a></li>
+                    <li ng-class="{ active: isActive('/colleagues')}"><a href="#/colleagues">Colleagues</a></li>
+                </ul>
+            </div>
+
         </div>
 
         <!-- Main content section start -->
@@ -72,7 +77,7 @@
 <script src="lib/angular/angular-route.min.js"></script>
 <script src="lib/jquery/jquery-1.11.0.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="js/docs.min.js"></script>
+<!--<script src="js/docs.min.js"></script>-->
 <script src="js/app.js"></script>
 <script src="js/services.js"></script>
 <script src="js/controllers.js"></script>

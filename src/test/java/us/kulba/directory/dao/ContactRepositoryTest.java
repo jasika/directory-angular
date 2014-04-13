@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import us.kulba.directory.config.TestConfig;
 import us.kulba.directory.model.Address;
 import us.kulba.directory.model.Contact;
+import us.kulba.directory.model.Phone;
 
 import java.util.*;
 
@@ -27,11 +28,11 @@ public class ContactRepositoryTest {
     @Autowired
     ContactRepository contactRepository;
 
-//    @Before
-//    public void setup() {
-//        logger.info("ContactRepositoryTest - deleteAll Contacts");
-//        contactRepository.deleteAll();
-//    }
+    @Before
+    public void setup() {
+        logger.info("ContactRepositoryTest - deleteAll Contacts");
+        contactRepository.deleteAll();
+    }
 
     /**
      * Local method to save a new contact.
@@ -42,6 +43,21 @@ public class ContactRepositoryTest {
         Contact c = new Contact();
         c.setFirstName("James");
         c.setLastName("Kulba");
+        c.setNickname("Jim");
+
+        Phone phone = new Phone();
+        phone.setPreferred(true);
+        phone.setPhoneType("MOBILE");
+        phone.setPhoneNum("333-444-5555");
+
+        c.addPhone(phone);
+
+        phone = new Phone();
+        phone.setPreferred(false);
+        phone.setPhoneType("HOME");
+        phone.setPhoneNum("321-990-5555");
+
+        c.addPhone(phone);
 
         Address address = new Address();
         address.setAddressLine1("123 Main");
