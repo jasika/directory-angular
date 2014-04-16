@@ -28,11 +28,11 @@ public class ContactRepositoryTest {
     @Autowired
     ContactRepository contactRepository;
 
-    @Before
-    public void setup() {
-        logger.info("ContactRepositoryTest - deleteAll Contacts");
-        contactRepository.deleteAll();
-    }
+//    @Before
+//    public void setup() {
+//        logger.info("ContactRepositoryTest - deleteAll Contacts");
+//        contactRepository.deleteAll();
+//    }
 
     /**
      * Local method to save a new contact.
