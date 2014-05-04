@@ -47,9 +47,9 @@ app.controller('ContactCreateCtrl', ['$scope', 'ContactsFactory', '$location',
   function ($scope, ContactsFactory, $location) {
 
     /* callback for ng-click 'createContact': */
-    $scope.createCreate = function () {
+    $scope.createContact = function () {
       ContactsFactory.create($scope.contact);
-      $location.path('/contact-list');
+      $location.path('/contacts/all');
     }
   }]);
 

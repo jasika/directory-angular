@@ -1,17 +1,35 @@
-<form novalidate class="form-horizontal" ng-submit="save()">
-	<div class="control-group">
-		<label class="control-label" for="url">Url</label>
-		<div class="controls">
-			<input type="url" ng-model="story.url" id="url" required/>
-		</div>
-	</div>
-	<div class="control-group">
-		<label class="control-label" for="fullName">Full Name</label>
-		<div class="controls">
-			<input type="text" ng-model="story.fullname" id="fullname" required/>
-		</div>
-	</div>
-	<div class="control-group">
-		<button id="save" class="btn btn-primary">Submit Story</button>
-	</div>
-</form>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Create New Contact
+    </div>
+
+    <div class="panel-body">
+
+        <form>
+            <div class="row form-group">
+                <div class="col-xs-4">
+                    <label for="firstName">First Name</label>
+                    <input type="text" class="form-control" id="firstName" placeholder="Enter first name" ng-model="contact.firstName">
+                </div>
+
+                <div class="col-xs-4">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" class="form-control" id="lastName" placeholder="Enter last name" ng-model="contact.lastName">
+                </div>
+
+                <div class="col-xs-4">
+                    <label for="nickname">Nickname</label>
+                    <input type="text" class="form-control" id="nickname" placeholder="Enter nickname" ng-model="contact.nickname">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <div class="controls">
+                    <a ng-click="createContact()" class="btn btn-small btn-primary">Create</a>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>
