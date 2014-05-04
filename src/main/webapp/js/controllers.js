@@ -2,25 +2,62 @@
 
 /* Controllers */
 
-var directoryControllers = angular.module('directoryControllers', []);
+var app = angular.module('directoryApp.controllers', []);
 
-directoryControllers.controller('ContactListCtrl', ['$scope', 'Contact',
-  function($scope, Contact) {
-    $scope.contacts = Contact.query();
+app.controller('ContactListCtrl', ['$scope', 'ContactsFactory', '$location',
+  function ($scope, ContactsFactory, $location) {
+
+    /* callback for ng-click 'editContact': */
+    $scope.editContact = function (contactId) {
+      $location.path('/contacts/contact-detail/' + contactId);
+    };
+
+    /* callback for ng-click 'deleteContact': */
+//    $scope.deleteContact = function (contactId) {
+//      ContactFactory.delete({ id: contactId });
+//      $scope.contacts = ContactsFactory.query();
+//    };
+
+    /* callback for ng-click 'createContact': */
+//    $scope.createContact = function () {
+//      $location.path('/contact-create');
+//    };
+
+    $scope.contacts = ContactsFactory.query();
   }]);
 
-directoryControllers.controller('ContactDetailCtrl', ['$scope', '$routeParams', 'Contact',
-  function($scope, $routeParams, Contact) {
-    $scope.contact_id = $routeParams.contactId;
-    $scope.contact = Contact.get({contactId: $routeParams.contactId}, function(contact) {
-    });
+app.controller('ContactDetailCtrl', ['$scope', '$routeParams', 'ContactFactory', '$location',
+  function ($scope, $routeParams, ContactFactory, $location) {
+
+    /* callback for ng-click 'updateContact': */
+    $scope.updateContact = function () {
+      ContactFactory.update($scope.contact);
+      $location.path('/contact-list');
+    };
+
+    /* callback for ng-click 'cancel': */
+    $scope.cancel = function () {
+      $location.path('/contact-list');
+    };
+
+    $scope.contact = ContactFactory.show({contactId: $routeParams.contactId});
   }]);
 
-directoryControllers.controller('MainCtrl', function($scope) {});
+app.controller('ContactCreateCtrl', ['$scope', 'ContactsFactory', '$location',
+  function ($scope, ContactsFactory, $location) {
 
-directoryControllers.controller('AboutCtrl', function($scope) {});
+    /* callback for ng-click 'createContact': */
+    $scope.createCreate = function () {
+      ContactsFactory.create($scope.contact);
+      $location.path('/contact-list');
+    }
+  }]);
 
-directoryControllers.controller('HelpCtrl', function($scope) {});
+app.controller('MainCtrl', function($scope) {});
+
+app.controller('AboutCtrl', function($scope) {});
+
+app.controller('HelpCtrl', function($scope) {});
 
 function NavBarController($scope, $location) {
     $scope.isActive = function (viewLocation) {

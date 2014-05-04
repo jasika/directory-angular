@@ -6,7 +6,6 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 import org.springframework.web.servlet.DispatcherServlet;
 import us.kulba.directory.config.appconfig.ApplicationConfig;
 import us.kulba.directory.config.appconfig.WebConfig;
-import us.kulba.directory.config.securityconfig.WebSecurityConfig;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -17,7 +16,7 @@ public class WebAppInitializer implements WebApplicationInitializer {
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
         AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
-        rootContext.register(ApplicationConfig.class, WebSecurityConfig.class);
+        rootContext.register(ApplicationConfig.class);
 
         servletContext.addListener(new ContextLoaderListener(rootContext));
 

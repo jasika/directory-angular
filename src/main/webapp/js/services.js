@@ -2,11 +2,23 @@
 
 /* Services */
 
-var contactServices = angular.module('contactServices', ['ngResource']);
+var services = angular.module('directoryApp.services', ['ngResource']);
 
-contactServices.factory('Contact', ['$resource',
-  function($resource){
-    return $resource('contacts/:contactId', {}, {
-      query: {method:'GET', params:{contactId:'@id'}, isArray:true}
-    });
-  }]);
+var baseUrl = 'http://localhost\\:8080';
+
+services.factory('ContactsFactory', function ($resource) {
+    console.log('Hello ContactsFactory');
+    return $resource(baseUrl + '/directory/contacts', {}, {
+        query: { method: 'GET', isArray: true },
+        create: { method: 'POST' }
+    })
+});
+
+services.factory('ContactFactory', function ($resource) {
+    console.log('Hello ContactFactory');
+    return $resource(baseUrl + '/directory/contacts/:contactId', {contactId: '@id'}, {
+        show: { method: 'GET' },
+        update: { method: 'PUT', params: {id: '@id'} },
+        delete: { method: 'DELETE', params: {id: '@id'} }
+    })
+});

@@ -1,7 +1,7 @@
 
 <div class="panel panel-default">
     <div class="panel-heading">
-        Contact Search Results
+        <h3>Contacts <a class="btn btn-primary pull-right" href="#/contacts/new"><i class="fa fa-plus"></i> Add New</a></h3>
     </div>
 
     <div class="panel-body">
@@ -24,9 +24,8 @@
                     <td><div ng-repeat="phone in contact.phoneList | filter:{ preferred: true }"/>{{phone.phoneNum}}</td>
                     <td>
                         <div class="pull-right">
-                            <a class="btn btn-info" href="#contacts/{{contact.id}}">
-                                <i class="fa fa-pencil fa-fw"></i> Edit
-                            </a>
+                            <a ng-click="editContact(contact.id)" class="btn btn-small btn-primary"><i class="fa fa-pencil-square-o"></i> edit</a>
+                            <a ng-click="deleteContact(contact.id)" class="btn btn-small btn-danger"><i class="fa fa-times"></i></i> delete</a>
                         </div>
                     </td>
                 </tr>

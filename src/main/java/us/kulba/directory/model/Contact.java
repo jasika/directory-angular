@@ -26,6 +26,7 @@ public class Contact {
     private Date dateUpdated;
     private List<Address> addressList;
     private List<Phone> phoneList;
+    private List<String> group;
 
     public Contact() {
         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("America/Los_Angeles"));
