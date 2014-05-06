@@ -6,6 +6,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.bson.types.ObjectId;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -99,6 +100,7 @@ public class Contact {
     }
 
 
+    @JsonIgnore
     public String getFullName() {
         String fullName[] = {firstName, lastName};
         return StringUtils.join(fullName, " ");

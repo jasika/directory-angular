@@ -71,8 +71,8 @@ public class ContactController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable("id") String id, @RequestBody Contact contact) {
-        contactRepository.delete(contact);
+    public void delete(@PathVariable("id") String id) {
+        contactRepository.delete(id);
     }
 
 

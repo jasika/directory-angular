@@ -4,8 +4,8 @@
 
 var app = angular.module('directoryApp.controllers', []);
 
-app.controller('ContactListCtrl', ['$scope', 'ContactsFactory', '$location',
-  function ($scope, ContactsFactory, $location) {
+app.controller('ContactListCtrl', ['$scope', 'ContactsFactory', 'ContactFactory', '$location',
+  function ($scope, ContactsFactory, ContactFactory, $location) {
 
     /* callback for ng-click 'editContact': */
     $scope.editContact = function (contactId) {
@@ -18,26 +18,22 @@ app.controller('ContactListCtrl', ['$scope', 'ContactsFactory', '$location',
 //      $scope.contacts = ContactsFactory.query();
 //    };
 
-    /* callback for ng-click 'createContact': */
-//    $scope.createContact = function () {
-//      $location.path('/contact-create');
-//    };
-
     $scope.contacts = ContactsFactory.query();
   }]);
 
-app.controller('ContactDetailCtrl', ['$scope', '$routeParams', 'ContactFactory', '$location',
-  function ($scope, $routeParams, ContactFactory, $location) {
-
-    /* callback for ng-click 'updateContact': */
-    $scope.updateContact = function () {
-      ContactFactory.update($scope.contact);
-      $location.path('/contact-list');
-    };
+app.controller('ContactDetailCtrl', ['$scope', '$routeParams', 'ContactFactory', 'ContactsFactory', '$location',
+  function ($scope, $routeParams, ContactFactory, ContactsFactory, $location) {
 
     /* callback for ng-click 'cancel': */
     $scope.cancel = function () {
       $location.path('/contact-list');
+    };
+
+    /* callback for ng-click 'saveContact': */
+    $scope.saveContact = function () {
+      ContactsFactory.save($scope.contact);
+//      $scope.contacts = ContactsFactory.query();
+      $location.path('/contacts/all');
     };
 
     $scope.contact = ContactFactory.show({contactId: $routeParams.contactId});
@@ -46,11 +42,6 @@ app.controller('ContactDetailCtrl', ['$scope', '$routeParams', 'ContactFactory',
 app.controller('ContactCreateCtrl', ['$scope', 'ContactsFactory', '$location',
   function ($scope, ContactsFactory, $location) {
 
-    /* callback for ng-click 'createContact': */
-    $scope.createContact = function () {
-      ContactsFactory.create($scope.contact);
-      $location.path('/contacts/all');
-    }
   }]);
 
 app.controller('MainCtrl', function($scope) {});

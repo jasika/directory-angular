@@ -13,5 +13,4 @@ import java.util.List;
 public interface ContactRepository extends MongoRepository<Contact, String> {
 
     List<Contact> findByLastNameLike(String lastName);
-    List<Contact> findByFullNameLike(String lastName);
 }
