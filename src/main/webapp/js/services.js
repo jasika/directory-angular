@@ -10,13 +10,12 @@ services.factory('ContactsFactory', function ($resource) {
     return $resource(baseUrl + '/directory/contacts', {}, {
         query: { method: 'GET', isArray: true },
         save: { method: 'POST' }
-//        update: { method: 'POST' }
     })
 });
 
 services.factory('ContactFactory', function ($resource) {
     return $resource(baseUrl + '/directory/contacts/:contactId', {}, {
         show: { method: 'GET' },
-        delete: { method: 'DELETE' }
+        delete: { method: 'POST' }
     })
 });

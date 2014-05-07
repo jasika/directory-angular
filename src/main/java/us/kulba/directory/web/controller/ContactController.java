@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import us.kulba.directory.dao.ContactRepository;
 import us.kulba.directory.model.Contact;
+import us.kulba.directory.model.MethodWrapper;
 
 import java.util.List;
 
@@ -63,16 +64,23 @@ public class ContactController {
     @RequestMapping(method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Void> save(@RequestBody Contact contact) {
-        logger.debug("Hit ContactController.saveContact()");
+        logger.debug("Hit ContactController save Contact");
         contactRepository.save(contact);
         ResponseEntity<Void> responseEntity = new ResponseEntity<Void>(HttpStatus.CREATED);
         return responseEntity;
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable("id") String id) {
-        contactRepository.delete(id);
+    /**
+     * Controller end-point used to delete contact with passed id.
+     *
+     */
+    @RequestMapping(method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> delete(@RequestBody MethodWrapper methodWrapper) {
+        logger.debug("Hit ContactController delete Contact");
+        Contact contact = (Contact)methodWrapper.getPayload();
+        contactRepository.delete(contact);
+        ResponseEntity<Void> responseEntity = new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+        return responseEntity;
     }
 
 
