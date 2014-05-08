@@ -4,8 +4,8 @@
 
 var app = angular.module('directoryApp.controllers', []);
 
-app.controller('ContactListCtrl', ['$scope', 'ContactsFactory', 'ContactFactory', '$location',
-  function ($scope, ContactsFactory, ContactFactory, $location) {
+app.controller('ContactListCtrl', ['$scope', 'ContactsFactory', '$location',
+  function ($scope, ContactsFactory, $location) {
 
     /* callback for ng-click 'editContact': */
     $scope.editContact = function (contactId) {
@@ -14,9 +14,10 @@ app.controller('ContactListCtrl', ['$scope', 'ContactsFactory', 'ContactFactory'
 
     /* callback for ng-click 'deleteContact': */
     $scope.deleteContact = function (contact) {
-      var method = { methodName: 'DELETE', payload: contact}
-      ContactFactory.delete(method);
-      $scope.contacts = ContactsFactory.query();
+      var methodWrapper = { "methodName": "Contact.DELETE", "payload": $scope.contact }
+
+      ContactsFactory.delete(methodWrapper);
+//      $scope.contacts = ContactsFactory.query();
     };
 
     $scope.contacts = ContactsFactory.query();
@@ -31,18 +32,14 @@ app.controller('ContactDetailCtrl', ['$scope', '$routeParams', 'ContactFactory',
     };
 
     /* callback for ng-click 'saveContact': */
-    $scope.saveContact = function () {
-      ContactsFactory.save($scope.contact);
-      $scope.contacts = ContactsFactory.query();
-      $location.path('/contacts/all');
+    $scope.saveContact = function (contact) {
+        var methodWrapper = { "methodName": "Contact.SAVE", "payload": $scope.contact }
+        ContactsFactory.save(methodWrapper);
+//        $scope.contacts = ContactsFactory.query();
+//        $location.path('/contacts/all');
     };
 
     $scope.contact = ContactFactory.show({contactId: $routeParams.contactId});
-  }]);
-
-app.controller('ContactCreateCtrl', ['$scope', 'ContactsFactory', '$location',
-  function ($scope, ContactsFactory, $location) {
-
   }]);
 
 app.controller('MainCtrl', function($scope) {});

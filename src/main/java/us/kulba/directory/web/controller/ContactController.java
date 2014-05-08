@@ -12,7 +12,9 @@ import us.kulba.directory.dao.ContactRepository;
 import us.kulba.directory.model.Contact;
 import us.kulba.directory.model.MethodWrapper;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Spring Controller for Contacts crud activities.
@@ -61,27 +63,56 @@ public class ContactController {
      * @param contact in JSON form.
      * @return
      */
-    @RequestMapping(method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Void> save(@RequestBody Contact contact) {
-        logger.debug("Hit ContactController save Contact");
-        contactRepository.save(contact);
-        ResponseEntity<Void> responseEntity = new ResponseEntity<Void>(HttpStatus.CREATED);
-        return responseEntity;
-    }
+//    @RequestMapping(method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
+//    @ResponseStatus(HttpStatus.CREATED)
+//    public ResponseEntity<Void> save(@RequestBody Contact contact) {
+//        logger.debug("Hit ContactController save Contact");
+//        contactRepository.save(contact);
+//        ResponseEntity<Void> responseEntity = new ResponseEntity<Void>(HttpStatus.CREATED);
+//        return responseEntity;
+//    }
 
     /**
      * Controller end-point used to delete contact with passed id.
      *
      */
     @RequestMapping(method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> delete(@RequestBody MethodWrapper methodWrapper) {
-        logger.debug("Hit ContactController delete Contact");
-        Contact contact = (Contact)methodWrapper.getPayload();
-        contactRepository.delete(contact);
-        ResponseEntity<Void> responseEntity = new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+    public ResponseEntity<String> execute(@RequestBody Map<String, Object> methodWrapper) {
+
+        logger.info("Size: " + methodWrapper.size());
+        logger.info("containsKey: " + methodWrapper.containsKey("payload"));
+
+        String method = (String)methodWrapper.get("methodName");
+        Contact contact = (Contact)methodWrapper.get("payload");
+
+        ResponseEntity<String> responseEntity = null;
+
+        if (method.equals("Contact.SAVE")) {
+            logger.debug("Hit ContactController SAVE Contact");
+            contactRepository.save(contact);
+            responseEntity = new ResponseEntity<String>("Contact created", HttpStatus.CREATED);
+
+        }
+//        else if (method.equals("Contact.UPDATE")) {
+//            logger.debug("Hit ContactController UPDATE Contact");
+//            contactRepository.save(contact);
+//            responseEntity = new ResponseEntity<String>("Contact updated", HttpStatus.OK);
+//
+//        }
+        else if (method.equals("Contact.DELETE")) {
+            logger.debug("Hit ContactController DELETE Contact");
+            contactRepository.delete(contact);
+            responseEntity = new ResponseEntity<String>("Contact deleted", HttpStatus.OK);
+
+        }
+        else {
+            responseEntity = new ResponseEntity<String>("Unknown Contact transaction type.", HttpStatus.BAD_REQUEST);
+        }
+
         return responseEntity;
     }
+
+
 
 
 }

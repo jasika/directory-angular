@@ -1,5 +1,7 @@
 package us.kulba.directory.model;
 
+import java.io.Serializable;
+
 /**
  * Wrapper
  *
@@ -25,4 +27,11 @@ public class MethodWrapper {
     public void setPayload(Object payload) {
         this.payload = payload;
     }
+
+//    public String toString() {
+//        StringBuilder sb = new StringBuilder();
+//        sb.append("MethodWrapper \n");
+//        sb.append("MethodName: " + this.getMethodName());
+//        return sb.toString();
+//    }
 }
