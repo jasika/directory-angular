@@ -10,11 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import us.kulba.directory.dao.ContactRepository;
 import us.kulba.directory.model.Contact;
-import us.kulba.directory.model.MethodWrapper;
+import us.kulba.directory.web.converter.ContactJsonConverter;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Spring Controller for Contacts crud activities.
@@ -77,38 +75,37 @@ public class ContactController {
      *
      */
     @RequestMapping(method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> execute(@RequestBody Map<String, Object> methodWrapper) {
-
-        logger.info("Size: " + methodWrapper.size());
-        logger.info("containsKey: " + methodWrapper.containsKey("payload"));
-
-        String method = (String)methodWrapper.get("methodName");
-        Contact contact = (Contact)methodWrapper.get("payload");
+    public ResponseEntity<String> execute(@RequestBody String json) {
 
         ResponseEntity<String> responseEntity = null;
 
-        if (method.equals("Contact.SAVE")) {
-            logger.debug("Hit ContactController SAVE Contact");
-            contactRepository.save(contact);
-            responseEntity = new ResponseEntity<String>("Contact created", HttpStatus.CREATED);
+        try {
+            String command = ContactJsonConverter.convertToString(json, "commandName");
+//            String command = "Contact.SAVE";
+            Contact contact = ContactJsonConverter.convertToContact(json);
+
+            if (command.equals("Contact.SAVE")) {
+                logger.debug("Hit ContactController SAVE Contact");
+                contactRepository.save(contact);
+                responseEntity = new ResponseEntity<String>("Contact created", HttpStatus.CREATED);
+
+            }
+            else if (command.equals("Contact.DELETE")) {
+                logger.debug("Hit ContactController DELETE Contact");
+                contactRepository.delete(contact);
+                responseEntity = new ResponseEntity<String>("Contact deleted", HttpStatus.OK);
+
+            }
+            else {
+                responseEntity = new ResponseEntity<String>("Unknown Contact transaction type.", HttpStatus.BAD_REQUEST);
+            }
 
         }
-//        else if (method.equals("Contact.UPDATE")) {
-//            logger.debug("Hit ContactController UPDATE Contact");
-//            contactRepository.save(contact);
-//            responseEntity = new ResponseEntity<String>("Contact updated", HttpStatus.OK);
-//
-//        }
-        else if (method.equals("Contact.DELETE")) {
-            logger.debug("Hit ContactController DELETE Contact");
-            contactRepository.delete(contact);
-            responseEntity = new ResponseEntity<String>("Contact deleted", HttpStatus.OK);
+        catch (Exception e) {
+            e.printStackTrace();
+            responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 
         }
-        else {
-            responseEntity = new ResponseEntity<String>("Unknown Contact transaction type.", HttpStatus.BAD_REQUEST);
-        }
-
         return responseEntity;
     }
 

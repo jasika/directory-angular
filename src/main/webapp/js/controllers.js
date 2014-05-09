@@ -14,10 +14,10 @@ app.controller('ContactListCtrl', ['$scope', 'ContactsFactory', '$location',
 
     /* callback for ng-click 'deleteContact': */
     $scope.deleteContact = function (contact) {
-      var methodWrapper = { "methodName": "Contact.DELETE", "payload": $scope.contact }
-
-      ContactsFactory.delete(methodWrapper);
-//      $scope.contacts = ContactsFactory.query();
+      var command = { "commandName": "Contact.DELETE", "data": contact }
+      ContactsFactory.delete(command);
+      $scope.contacts = ContactsFactory.query();
+      $location.path('/contacts/all');
     };
 
     $scope.contacts = ContactsFactory.query();
@@ -28,15 +28,15 @@ app.controller('ContactDetailCtrl', ['$scope', '$routeParams', 'ContactFactory',
 
     /* callback for ng-click 'cancel': */
     $scope.cancel = function () {
-      $location.path('/contact-list');
+      $location.path('/contacts/all');
     };
 
     /* callback for ng-click 'saveContact': */
     $scope.saveContact = function (contact) {
-        var methodWrapper = { "methodName": "Contact.SAVE", "payload": $scope.contact }
-        ContactsFactory.save(methodWrapper);
+        var command = { "commandName": "Contact.SAVE", "data": $scope.contact }
+        ContactsFactory.save(command);
 //        $scope.contacts = ContactsFactory.query();
-//        $location.path('/contacts/all');
+        $location.path('/contacts/all');
     };
 
     $scope.contact = ContactFactory.show({contactId: $routeParams.contactId});

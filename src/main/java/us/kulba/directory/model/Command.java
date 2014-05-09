@@ -3,11 +3,11 @@ package us.kulba.directory.model;
 import java.io.Serializable;
 
 /**
- * Wrapper
+ * Command Wrapper
  *
  * @author James Kulba, Thermo Fisher Scientific, 2014
  */
-public class MethodWrapper {
+public class Command {
 
     private String methodName;
     private Object payload;
