@@ -100,7 +100,7 @@ public class Contact {
     }
 
 
-    @JsonIgnore
+//    @JsonIgnore
     public String getFullName() {
         String fullName[] = {firstName, lastName};
         return StringUtils.join(fullName, " ");

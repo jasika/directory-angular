@@ -8,7 +8,7 @@ var baseUrl = 'http://localhost\\:8080';
 
 services.factory('ContactsFactory', function ($resource) {
     return $resource(baseUrl + '/directory/contacts', {}, {
-        query: { method: 'GET', isArray: true },
+        query: { method: 'GET', isArray: true, cache: false },
         save: { method: 'POST' },
         delete: { method: 'POST' }
     })
