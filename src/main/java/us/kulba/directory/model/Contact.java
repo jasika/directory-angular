@@ -8,6 +8,7 @@ import org.apache.commons.lang.builder.ToStringStyle;
 import org.bson.types.ObjectId;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
@@ -20,14 +21,16 @@ public class Contact {
 
     @Id
     protected final String id;
+    @Indexed
     private String firstName;
+    @Indexed
     private String lastName;
     private String nickname;
     private Date dateEntered;
     private Date dateUpdated;
-    private List<Address> addressList;
-    private List<Phone> phoneList;
-    private List<String> group;
+    private List<Address> addressList = new ArrayList<Address>();
+    private List<Phone> phoneList = new ArrayList<Phone>();
+    private List<String> groupList = new ArrayList<String>();
 
     public Contact() {
         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("America/Los_Angeles"));
@@ -73,34 +76,27 @@ public class Contact {
         this.dateUpdated = dateUpdated;
     }
 
-    public List<Phone> getPhoneList() {
-        if (this.phoneList == null) {
-            this.phoneList = new ArrayList<Phone>();
-        }
-        return this.phoneList;
-    }
+    public List<Phone> getPhoneList() { return phoneList; }
 
     public void setPhoneList(List<Phone> phoneList) { this.phoneList = phoneList; }
 
-    public void addPhone(Phone phone) { getPhoneList().add(phone); }
+    public void addPhone(Phone phone) { this.phoneList.add(phone); }
 
-    public List<Address> getAddressList() {
-        if (this.addressList == null) {
-            this.addressList = new ArrayList<Address>();
-        }
-        return this.addressList;
-    }
+    public List<Address> getAddressList() { return addressList; }
 
-    public void setAddressList(List<Address> addressList) {
-        getAddressList().addAll(addressList);
-    }
+    public void setAddressList(List<Address> addressList) { this.addressList = addressList; }
 
     public void addAddress(Address address) {
-        getAddressList().add(address);
+        this.addressList.add(address);
     }
 
+    public List<String> getGroupList() { return groupList; }
 
-//    @JsonIgnore
+    public void setGroupList(List<String> groupList) {this.groupList = groupList;}
+
+    public void addGroup(String group) { this.getGroupList().add(group); }
+
+    @JsonIgnore
     public String getFullName() {
         String fullName[] = {firstName, lastName};
         return StringUtils.join(fullName, " ");

@@ -44,6 +44,9 @@ public class ContactRepositoryTest {
         c.setFirstName("James");
         c.setLastName("Kulba");
         c.setNickname("Jim");
+        c.addGroup("Family");
+        c.addGroup("Friends");
+        c.addGroup("Colleagues");
 
         Phone phone = new Phone();
         phone.setPreferred(true);
