@@ -4,8 +4,10 @@
 
 var app = angular.module('directoryApp.controllers', []);
 
-app.controller('ContactListCtrl', ['$scope', 'ContactsFactory', '$location',
-  function ($scope, ContactsFactory, $location) {
+app.controller('ContactListCtrl', ['$scope', '$routeParams', 'ContactsFactory', '$location',
+  function ($scope, $routeParams, ContactsFactory, $location) {
+
+//    console.log('Hey')
 
     /* callback for ng-click 'editContact': */
     $scope.editContact = function (contactId) {
@@ -21,11 +23,15 @@ app.controller('ContactListCtrl', ['$scope', 'ContactsFactory', '$location',
         });
     };
 
-    $scope.contacts = ContactsFactory.query();
+    if($routeParams.groupId) {
+        console.log($routeParams.groupId)
+        $scope.contacts = ContactsFactory.query({groupId: $routeParams.groupId});
+    }
+
   }]);
 
 app.controller('ContactDetailCtrl', ['$scope', '$routeParams', 'ContactFactory', 'ContactsFactory', '$location',
-  function ($scope, $routeParams, ContactFactory, ContactsFactory, $location) {
+  function ($scope, ContactFactory, ContactsFactory, $location) {
 
     /* callback for ng-click 'cancel': */
     $scope.cancel = function () {

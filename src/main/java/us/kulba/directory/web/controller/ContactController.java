@@ -12,6 +12,7 @@ import us.kulba.directory.dao.ContactRepository;
 import us.kulba.directory.model.Contact;
 import us.kulba.directory.web.converter.ContactJsonConverter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,9 +35,19 @@ public class ContactController {
      * @return list of contacts
      */
     @RequestMapping(method = RequestMethod.GET)
-    public @ResponseBody List<Contact> list() {
+    public @ResponseBody List<Contact> list(@RequestParam(value = "groupId", required = true) String groupId) {
         logger.debug("Hit ContactController.allContacts()");
-        return contactRepository.findAll();
+//        return contactRepository.findAll();
+
+        List<Contact> contacts = new ArrayList<Contact>();
+
+        if ( groupId.equals("all") ) {
+            contacts = contactRepository.findAll();
+
+        } else {
+            contacts = contactRepository.findByContactGroup(groupId);
+        }
+        return contacts;
     }
 
     /**

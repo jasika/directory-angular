@@ -52,10 +52,10 @@
 
             <div ng-controller="NavBarController">
                 <ul class="nav nav-sidebar">
-                    <li ng-class="{ active: isActive('/contacts/all')}"><a href="#/contacts/all">All Contacts</a></li>
-                    <li ng-class="{ active: isActive('/contacts/family')}"><a href="#/contacts/family">Family</a></li>
-                    <li ng-class="{ active: isActive('/contacts/friends')}"><a href="#/contacts/friends">Friends</a></li>
-                    <li ng-class="{ active: isActive('/contacts/colleagues')}"><a href="#/contacts/colleagues">Colleagues</a></li>
+                    <li ng-class="{ active: isActive('/contacts/list/all')}"><a href="#/contacts/list?groupId=all">All Contacts</a></li>
+                    <li ng-class="{ active: isActive('/contacts/family')}"><a href="#/contacts/list?groupId=Family">Family</a></li>
+                    <li ng-class="{ active: isActive('/contacts/friends')}"><a href="#/contacts/list?groupId=Friends">Friends</a></li>
+                    <li ng-class="{ active: isActive('/contacts/colleagues')}"><a href="#/contacts/list?groupId=Colleagues">Colleagues</a></li>
                 </ul>
             </div>
 
