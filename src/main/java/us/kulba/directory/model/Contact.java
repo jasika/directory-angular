@@ -28,9 +28,9 @@ public class Contact {
     private String nickname;
     private Date dateEntered;
     private Date dateUpdated;
-    private List<Address> addressList = new ArrayList<Address>();
-    private List<Phone> phoneList = new ArrayList<Phone>();
-    private List<String> groupList = new ArrayList<String>();
+//    private List<Address> addressList = new ArrayList<Address>();
+//    private List<Phone> phoneList = new ArrayList<Phone>();
+//    private List<String> groupList = new ArrayList<String>();
 
     public Contact() {
         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("America/Los_Angeles"));
@@ -76,25 +76,25 @@ public class Contact {
         this.dateUpdated = dateUpdated;
     }
 
-    public List<Phone> getPhoneList() { return phoneList; }
+//    public List<Phone> getPhoneList() { return phoneList; }
 
-    public void setPhoneList(List<Phone> phoneList) { this.phoneList = phoneList; }
+//    public void setPhoneList(List<Phone> phoneList) { this.phoneList = phoneList; }
 
-    public void addPhone(Phone phone) { this.phoneList.add(phone); }
+//    public void addPhone(Phone phone) { this.phoneList.add(phone); }
 
-    public List<Address> getAddressList() { return addressList; }
+//    public List<Address> getAddressList() { return addressList; }
 
-    public void setAddressList(List<Address> addressList) { this.addressList = addressList; }
+//    public void setAddressList(List<Address> addressList) { this.addressList = addressList; }
 
-    public void addAddress(Address address) {
-        this.addressList.add(address);
-    }
+//    public void addAddress(Address address) {
+//        this.addressList.add(address);
+//    }
 
-    public List<String> getGroupList() { return groupList; }
+//    public List<String> getGroupList() { return groupList; }
 
-    public void setGroupList(List<String> groupList) {this.groupList = groupList;}
+//    public void setGroupList(List<String> groupList) {this.groupList = groupList;}
 
-    public void addGroup(String group) { this.getGroupList().add(group); }
+//    public void addGroup(String group) { this.getGroupList().add(group); }
 
     @JsonIgnore
     public String getFullName() {

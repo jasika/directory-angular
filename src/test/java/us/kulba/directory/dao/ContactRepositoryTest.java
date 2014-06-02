@@ -44,45 +44,45 @@ public class ContactRepositoryTest {
         c.setFirstName("James");
         c.setLastName("Kulba");
         c.setNickname("Jim");
-        c.addGroup("Family");
-        c.addGroup("Friends");
-        c.addGroup("Colleagues");
+//        c.addGroup("Family");
+//        c.addGroup("Friends");
+//        c.addGroup("Colleagues");
 
-        Phone phone = new Phone();
-        phone.setPreferred(true);
-        phone.setPhoneType("MOBILE");
-        phone.setPhoneNum("333-444-5555");
+//        Phone phone = new Phone();
+//        phone.setPreferred(true);
+//        phone.setPhoneType("MOBILE");
+//        phone.setPhoneNum("333-444-5555");
 
-        c.addPhone(phone);
+//        c.addPhone(phone);
 
-        phone = new Phone();
-        phone.setPreferred(false);
-        phone.setPhoneType("HOME");
-        phone.setPhoneNum("321-990-5555");
+//        phone = new Phone();
+//        phone.setPreferred(false);
+//        phone.setPhoneType("HOME");
+//        phone.setPhoneNum("321-990-5555");
+//
+//        c.addPhone(phone);
 
-        c.addPhone(phone);
+//        Address address = new Address();
+//        address.setAddressLine1("123 Main");
+//        address.setAddressLine2("BLANK");
+//        address.setAddressCity("Los Angeles");
+//        address.setAddressState("CA");
+//        address.setZipCode("81950");
+//        address.setPreferred(false);
+//        address.setAddressType("WORK");
+//
+//        c.addAddress(address);
 
-        Address address = new Address();
-        address.setAddressLine1("123 Main");
-        address.setAddressLine2("BLANK");
-        address.setAddressCity("Los Angeles");
-        address.setAddressState("CA");
-        address.setZipCode("81950");
-        address.setPreferred(false);
-        address.setAddressType("WORK");
-
-        c.addAddress(address);
-
-        address = new Address();
-        address.setAddressLine1("27 Sonata");
-        address.setAddressLine2("BLANK");
-        address.setAddressCity("Irvine");
-        address.setAddressState("CA");
-        address.setZipCode("92813");
-        address.setPreferred(true);
-        address.setAddressType("HOME");
-
-        c.addAddress(address);
+//        address = new Address();
+//        address.setAddressLine1("27 Sonata");
+//        address.setAddressLine2("BLANK");
+//        address.setAddressCity("Irvine");
+//        address.setAddressState("CA");
+//        address.setZipCode("92813");
+//        address.setPreferred(true);
+//        address.setAddressType("HOME");
+//
+//        c.addAddress(address);
 
         contactRepository.save(c);
 
